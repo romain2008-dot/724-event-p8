@@ -22,7 +22,7 @@ const Slider = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [index]);
+  }, [index, byDateDesc]);
 
   return (
     <div className="SlideCardList">
