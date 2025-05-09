@@ -7,18 +7,23 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
+  
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtB.date) - new Date(evtA.date)
   );
+  
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index === byDateDesc.length - 1 ? 0 : index + 1),
-      5000
-    );
+    setIndex(index === byDateDesc.length - 1 ? 0 : index + 1);
   };
+  
   useEffect(() => {
-    nextCard();
-  });
+    const timer = setTimeout(nextCard, 5000);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [index]);
+
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
@@ -38,8 +43,7 @@ const Slider = () => {
           </div>
         </div>
       ))}
-  
-      {/* Paginaton rendue UNE SEULE FOIS ici */}
+
       <div className="SlideCard__paginationContainer">
         <div className="SlideCard__pagination">
           {byDateDesc?.map((event, radioIdx) => (
