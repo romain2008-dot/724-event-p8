@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     if (data) return;
     getData();
-  });
+  }, []); // Ajouter le tableau de dépendances vide
 
   const last = data?.events?.sort((evtA, evtB) =>
     new Date(evtB.date) - new Date(evtA.date)
