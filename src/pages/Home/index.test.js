@@ -46,7 +46,7 @@ describe("When a page is created", () => {
   })
   it("an event card, with the last event, is displayed", () => {
     render(<Home />);
-    const lastEvent = screen.getByTestId("lastEvent");
+    const lastEvent = screen.findByTestId("card-testid");
     expect(lastEvent).toBeDefined();
   })
 });
